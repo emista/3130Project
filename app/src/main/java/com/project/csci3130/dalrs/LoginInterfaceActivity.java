@@ -25,7 +25,8 @@ public class LoginInterfaceActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener {
         private DatabaseReference Ref;
-
+        private static FirebaseUser user;
+        private static FirebaseAuth auth;
 
 
     @Override
@@ -68,9 +69,9 @@ public class LoginInterfaceActivity extends AppCompatActivity
        final TextView name = (TextView)NavView.findViewById(R.id.UserName);
        final TextView Email = (TextView)NavView.findViewById(R.id.UserEmail);*/
 
-        Ref = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference wtf = Ref.child("Users").child("xvELMQVxtNRJnGILeAPseN9gT8B2").child("Email");
-        DatabaseReference wtf2 = Ref.child("Users").child("xvELMQVxtNRJnGILeAPseN9gT8B2").child("UserName");
+        Ref = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference wtf = Ref.child(user.getUid()).child("Email");
+        DatabaseReference wtf2 = Ref.child(user.getUid()).child("UserName");
         //这个地方读Email
         wtf.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,6 +171,7 @@ public class LoginInterfaceActivity extends AppCompatActivity
 
 
         }else if (id == R.id.nav_fifth_layout) {
+            auth.signOut();
             startActivity(new Intent(LoginInterfaceActivity.this,LoginActivity.class));
         }
 
@@ -179,11 +181,18 @@ public class LoginInterfaceActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-   /* private void setAuth(FirebaseAuth a){
-        this.auth = a;
+    public static void setAuth(FirebaseAuth a){
+        auth = a;
     }
 
-    private void setUser(FirebaseUser u){
-        this.user = u;
-    }*/
+    public static void setUser(FirebaseUser u){
+        user = u;
+    }
+    public static FirebaseAuth getAuth(){
+        return auth;
+    }
+
+    public static FirebaseUser getUser(){
+        return user;
+    }
 }
