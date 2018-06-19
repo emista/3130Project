@@ -30,7 +30,7 @@ public class CourseViewList extends AppCompatActivity {
     private TextView test2;
     private DatabaseReference mReference;
     private DatabaseReference wReference;
-
+//
     private ExpandableListView expandableListView;
     private ExpandableListViewAdapter adapter;
     private List<String> courseCS = new ArrayList<>();
