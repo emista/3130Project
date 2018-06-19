@@ -25,7 +25,7 @@ public class forget_password extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(e.getText().toString().isEmpty()) {
+                if(!e.getText().toString().isEmpty()) {
                     e.setError("Please enter the email!");
                     Toast.makeText(forget_password.this, "Please enter the email", Toast.LENGTH_LONG).show();
                     return;
